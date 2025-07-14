@@ -1,0 +1,631 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		45D07AE62E22B21100383C43 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 45D07AE52E22B21100383C43 /* Auth */; };
+		45D07AE82E22B21100383C43 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 45D07AE72E22B21100383C43 /* Functions */; };
+		45D07AEA2E22B21100383C43 /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 45D07AE92E22B21100383C43 /* PostgREST */; };
+		45D07AEC2E22B21100383C43 /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 45D07AEB2E22B21100383C43 /* Realtime */; };
+		45D07AEE2E22B21100383C43 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 45D07AED2E22B21100383C43 /* Storage */; };
+		45DCBC222E22B33D00DBA4F5 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 45D07AEF2E22B21100383C43 /* Supabase */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		45C588EA2E22A7170050B3B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45C588D42E22A7160050B3B1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45C588DB2E22A7160050B3B1;
+			remoteInfo = dreamweaver2.0;
+		};
+		45C588F42E22A7170050B3B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45C588D42E22A7160050B3B1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45C588DB2E22A7160050B3B1;
+			remoteInfo = dreamweaver2.0;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		45C588DC2E22A7160050B3B1 /* dreamweaver2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dreamweaver2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45C588E92E22A7170050B3B1 /* dreamweaver2.0Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dreamweaver2.0Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		45C588F32E22A7170050B3B1 /* dreamweaver2.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dreamweaver2.0UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		45C588DE2E22A7160050B3B1 /* dreamweaver2.0 */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = dreamweaver2.0;
+			sourceTree = "<group>";
+		};
+		45C588EC2E22A7170050B3B1 /* dreamweaver2.0Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = dreamweaver2.0Tests;
+			sourceTree = "<group>";
+		};
+		45C588F62E22A7170050B3B1 /* dreamweaver2.0UITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = dreamweaver2.0UITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		45C588D92E22A7160050B3B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45DCBC222E22B33D00DBA4F5 /* Supabase in Frameworks */,
+				45D07AEA2E22B21100383C43 /* PostgREST in Frameworks */,
+				45D07AE82E22B21100383C43 /* Functions in Frameworks */,
+				45D07AE62E22B21100383C43 /* Auth in Frameworks */,
+				45D07AEE2E22B21100383C43 /* Storage in Frameworks */,
+				45D07AEC2E22B21100383C43 /* Realtime in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C588E62E22A7170050B3B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C588F02E22A7170050B3B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		45C588D32E22A7160050B3B1 = {
+			isa = PBXGroup;
+			children = (
+				45C588DE2E22A7160050B3B1 /* dreamweaver2.0 */,
+				45C588EC2E22A7170050B3B1 /* dreamweaver2.0Tests */,
+				45C588F62E22A7170050B3B1 /* dreamweaver2.0UITests */,
+				45C588DD2E22A7160050B3B1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		45C588DD2E22A7160050B3B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45C588DC2E22A7160050B3B1 /* dreamweaver2.0.app */,
+				45C588E92E22A7170050B3B1 /* dreamweaver2.0Tests.xctest */,
+				45C588F32E22A7170050B3B1 /* dreamweaver2.0UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		45C588DB2E22A7160050B3B1 /* dreamweaver2.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45C588FD2E22A7170050B3B1 /* Build configuration list for PBXNativeTarget "dreamweaver2.0" */;
+			buildPhases = (
+				45C588D82E22A7160050B3B1 /* Sources */,
+				45C588D92E22A7160050B3B1 /* Frameworks */,
+				45C588DA2E22A7160050B3B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				45C588DE2E22A7160050B3B1 /* dreamweaver2.0 */,
+			);
+			name = dreamweaver2.0;
+			packageProductDependencies = (
+				45D07AE52E22B21100383C43 /* Auth */,
+				45D07AE72E22B21100383C43 /* Functions */,
+				45D07AE92E22B21100383C43 /* PostgREST */,
+				45D07AEB2E22B21100383C43 /* Realtime */,
+				45D07AED2E22B21100383C43 /* Storage */,
+				45D07AEF2E22B21100383C43 /* Supabase */,
+			);
+			productName = dreamweaver2.0;
+			productReference = 45C588DC2E22A7160050B3B1 /* dreamweaver2.0.app */;
+			productType = "com.apple.product-type.application";
+		};
+		45C588E82E22A7170050B3B1 /* dreamweaver2.0Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45C589002E22A7170050B3B1 /* Build configuration list for PBXNativeTarget "dreamweaver2.0Tests" */;
+			buildPhases = (
+				45C588E52E22A7170050B3B1 /* Sources */,
+				45C588E62E22A7170050B3B1 /* Frameworks */,
+				45C588E72E22A7170050B3B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45C588EB2E22A7170050B3B1 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				45C588EC2E22A7170050B3B1 /* dreamweaver2.0Tests */,
+			);
+			name = dreamweaver2.0Tests;
+			packageProductDependencies = (
+			);
+			productName = dreamweaver2.0Tests;
+			productReference = 45C588E92E22A7170050B3B1 /* dreamweaver2.0Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		45C588F22E22A7170050B3B1 /* dreamweaver2.0UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45C589032E22A7170050B3B1 /* Build configuration list for PBXNativeTarget "dreamweaver2.0UITests" */;
+			buildPhases = (
+				45C588EF2E22A7170050B3B1 /* Sources */,
+				45C588F02E22A7170050B3B1 /* Frameworks */,
+				45C588F12E22A7170050B3B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45C588F52E22A7170050B3B1 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				45C588F62E22A7170050B3B1 /* dreamweaver2.0UITests */,
+			);
+			name = dreamweaver2.0UITests;
+			packageProductDependencies = (
+			);
+			productName = dreamweaver2.0UITests;
+			productReference = 45C588F32E22A7170050B3B1 /* dreamweaver2.0UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		45C588D42E22A7160050B3B1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					45C588DB2E22A7160050B3B1 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					45C588E82E22A7170050B3B1 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 45C588DB2E22A7160050B3B1;
+					};
+					45C588F22E22A7170050B3B1 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 45C588DB2E22A7160050B3B1;
+					};
+				};
+			};
+			buildConfigurationList = 45C588D72E22A7160050B3B1 /* Build configuration list for PBXProject "dreamweaver2.0" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 45C588D32E22A7160050B3B1;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				45D07AE42E22B21100383C43 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 45C588DD2E22A7160050B3B1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				45C588DB2E22A7160050B3B1 /* dreamweaver2.0 */,
+				45C588E82E22A7170050B3B1 /* dreamweaver2.0Tests */,
+				45C588F22E22A7170050B3B1 /* dreamweaver2.0UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		45C588DA2E22A7160050B3B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C588E72E22A7170050B3B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C588F12E22A7170050B3B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		45C588D82E22A7160050B3B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C588E52E22A7170050B3B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C588EF2E22A7170050B3B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		45C588EB2E22A7170050B3B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45C588DB2E22A7160050B3B1 /* dreamweaver2.0 */;
+			targetProxy = 45C588EA2E22A7170050B3B1 /* PBXContainerItemProxy */;
+		};
+		45C588F52E22A7170050B3B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45C588DB2E22A7160050B3B1 /* dreamweaver2.0 */;
+			targetProxy = 45C588F42E22A7170050B3B1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		45C588FB2E22A7170050B3B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 24T3M8PF9V;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		45C588FC2E22A7170050B3B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 24T3M8PF9V;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		45C588FE2E22A7170050B3B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 24T3M8PF9V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "bmilev.dreamweaver2-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		45C588FF2E22A7170050B3B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 24T3M8PF9V;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "bmilev.dreamweaver2-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		45C589012E22A7170050B3B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 24T3M8PF9V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "bmilev.dreamweaver2-0Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dreamweaver2.0.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dreamweaver2.0";
+			};
+			name = Debug;
+		};
+		45C589022E22A7170050B3B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 24T3M8PF9V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "bmilev.dreamweaver2-0Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dreamweaver2.0.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dreamweaver2.0";
+			};
+			name = Release;
+		};
+		45C589042E22A7170050B3B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 24T3M8PF9V;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "bmilev.dreamweaver2-0UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = dreamweaver2.0;
+			};
+			name = Debug;
+		};
+		45C589052E22A7170050B3B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 24T3M8PF9V;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "bmilev.dreamweaver2-0UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = dreamweaver2.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		45C588D72E22A7160050B3B1 /* Build configuration list for PBXProject "dreamweaver2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45C588FB2E22A7170050B3B1 /* Debug */,
+				45C588FC2E22A7170050B3B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45C588FD2E22A7170050B3B1 /* Build configuration list for PBXNativeTarget "dreamweaver2.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45C588FE2E22A7170050B3B1 /* Debug */,
+				45C588FF2E22A7170050B3B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45C589002E22A7170050B3B1 /* Build configuration list for PBXNativeTarget "dreamweaver2.0Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45C589012E22A7170050B3B1 /* Debug */,
+				45C589022E22A7170050B3B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45C589032E22A7170050B3B1 /* Build configuration list for PBXNativeTarget "dreamweaver2.0UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45C589042E22A7170050B3B1 /* Debug */,
+				45C589052E22A7170050B3B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		45D07AE42E22B21100383C43 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		45D07AE52E22B21100383C43 /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45D07AE42E22B21100383C43 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		45D07AE72E22B21100383C43 /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45D07AE42E22B21100383C43 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		45D07AE92E22B21100383C43 /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45D07AE42E22B21100383C43 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		45D07AEB2E22B21100383C43 /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45D07AE42E22B21100383C43 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		45D07AED2E22B21100383C43 /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45D07AE42E22B21100383C43 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+		45D07AEF2E22B21100383C43 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 45D07AE42E22B21100383C43 /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 45C588D42E22A7160050B3B1 /* Project object */;
+}
