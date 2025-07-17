@@ -71,12 +71,13 @@ struct DesignSystem {
     
     // MARK: - Gradients - DreamPress.ai Style
     struct Gradients {
-        // Main background gradient - Purple to dark
+        // Main background gradient - Purple to dark (DreamPress style)
         static let background = LinearGradient(
             gradient: Gradient(colors: [
-                Color(red: 0.25, green: 0.15, blue: 0.35), // Purple top
-                Color(red: 0.15, green: 0.10, blue: 0.25), // Purple middle
-                Color(red: 0.05, green: 0.05, blue: 0.08)  // Dark bottom
+                Color(red: 0.45, green: 0.25, blue: 0.65), // Rich purple top
+                Color(red: 0.35, green: 0.15, blue: 0.55), // Deep purple middle
+                Color(red: 0.25, green: 0.10, blue: 0.45), // Dark purple
+                Color(red: 0.08, green: 0.05, blue: 0.15)  // Very dark purple bottom
             ]),
             startPoint: .topLeading,
             endPoint: .bottomTrailing

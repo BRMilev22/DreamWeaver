@@ -3,6 +3,7 @@ import SwiftUI
 struct ModernTabView: View {
     @StateObject private var supabaseService = SupabaseService()
     @State private var selectedTab = 0
+    @State private var newlyCreatedStory: Story? = nil
     
     var body: some View {
         Group {
@@ -20,7 +21,7 @@ struct ModernTabView: View {
                                 .tag(0)
                             
                             // Reading Tab - Stories list
-                            ModernMyStoriesView()
+                            ModernReadingView(newlyCreatedStory: $newlyCreatedStory)
                                 .tag(1)
                         }
                         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -28,6 +29,12 @@ struct ModernTabView: View {
                         
                         // Custom Tab Bar with shorter height
                         modernTabBar
+                    }
+                }
+                .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("NavigateToNewStory"))) { notification in
+                    if let story = notification.object as? Story {
+                        newlyCreatedStory = story
+                        selectedTab = 1 // Navigate to Reading tab
                     }
                 }
             } else {

@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - Chapter Model
-struct Chapter: Codable, Identifiable {
+struct Chapter: Codable, Identifiable, Equatable {
     let id: UUID
     let storyId: UUID
     let chapterNumber: Int
@@ -44,7 +44,7 @@ struct Chapter: Codable, Identifiable {
 }
 
 // MARK: - Updated Story Model (without single content field)
-struct Story: Codable, Identifiable {
+struct Story: Codable, Identifiable, Equatable {
     let id: UUID
     let userId: UUID
     let title: String
@@ -180,7 +180,7 @@ struct Story: Codable, Identifiable {
 }
 
 // MARK: - Story Generation Parameters
-struct StoryGenerationParameters: Codable {
+struct StoryGenerationParameters: Codable, Equatable {
     let genre: StoryGenre
     let mood: StoryMood
     let length: StoryLength

@@ -360,6 +360,7 @@ struct PrimaryButtonStyle: ButtonStyle {
 struct ChapterView: View {
     @EnvironmentObject var supabaseService: SupabaseService
     @StateObject private var mistralService = MistralService()
+    @StateObject private var voiceService = VoiceService.shared
     @State private var chapters: [Chapter]
     @State private var sortedChapters: [Chapter]
     @State private var currentChapterIndex: Int = 0
@@ -384,12 +385,20 @@ struct ChapterView: View {
     @State private var selectedSuggestionForGeneration: String?
     @State private var showingGenerationModal = false
     
-    init(story: Story, onContinueGeneration: ((Int) -> Void)? = nil) {
+    init(story: Story, chapters: [Chapter] = [], onContinueGeneration: ((Int) -> Void)? = nil) {
         self.story = story
         self.onContinueGeneration = onContinueGeneration
-        let chapters = story.chapters ?? []
-        self._chapters = State(initialValue: chapters)
-        self._sortedChapters = State(initialValue: chapters.sorted(by: { $0.chapterNumber < $1.chapterNumber }))
+        let storyChapters = chapters.isEmpty ? (story.chapters ?? []) : chapters
+        self._chapters = State(initialValue: storyChapters)
+        self._sortedChapters = State(initialValue: storyChapters.sorted(by: { $0.chapterNumber < $1.chapterNumber }))
+        
+        // Auto-expand first chapter for newly generated stories
+        let isNewlyGenerated = NewStoryTracker.shared.isNewlyGenerated(story.id)
+        self._isChapterExpanded = State(initialValue: isNewlyGenerated)
+
+        
+        // Start with first chapter if newly generated
+        self._currentChapterIndex = State(initialValue: 0)
     }
     
     var currentChapter: Chapter? {
@@ -446,7 +455,7 @@ struct ChapterView: View {
             }
             .padding(.top, DesignSystem.Spacing.xl)
         }
-        .background(Color.clear)
+        .background(DesignSystem.Gradients.background)
         .sheet(isPresented: $showingGenerationModal) {
             if let suggestion = selectedSuggestionForGeneration {
                 ChapterGenerationModal(
@@ -529,11 +538,54 @@ struct ChapterView: View {
             
             // Chapter Content (expandable)
             if isChapterExpanded {
-                Text(currentChapter?.content ?? "Chapter content not available")
-                    .font(DesignSystem.Typography.body)
-                    .foregroundColor(DesignSystem.Colors.textPrimary)
-                    .lineSpacing(6)
-                    .multilineTextAlignment(.leading)
+                Group {
+                    if let chapter = currentChapter {
+                        let isNewlyGenerated = NewStoryTracker.shared.isNewlyGenerated(story.id)
+                        let isFirstChapter = currentChapterIndex == 0
+                        
+                        if isNewlyGenerated && isFirstChapter {
+                            // Use typewriter effect with TTS for the first chapter of newly generated stories
+                            TypewriterTextWithTTS(
+                                text: chapter.content,
+                                font: DesignSystem.Typography.body,
+                                color: DesignSystem.Colors.textPrimary,
+                                highlightColor: DesignSystem.Colors.accent.opacity(0.3),
+                                speed: 50.0
+                            )
+                            .onAppear {
+                                print("📱 DEBUG: Using TypewriterTextWithTTS for newly generated story")
+                                print("📱 DEBUG: Story ID: \(story.id)")
+                                print("📱 DEBUG: Content length: \(chapter.content.count)")
+                                // Mark story as viewed after typewriter starts
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                                    NewStoryTracker.shared.markAsViewed(story.id)
+                                }
+                            }
+                        } else {
+                            // Use highlighted text for existing stories or subsequent chapters
+                            HighlightedText(
+                                text: chapter.content,
+                                font: DesignSystem.Typography.body,
+                                color: DesignSystem.Colors.textPrimary,
+                                highlightColor: DesignSystem.Colors.accent.opacity(0.3)
+                            )
+                            .onAppear {
+                                print("📱 DEBUG: Using HighlightedText (NOT regular Text)")
+                                print("📱 DEBUG: isNewlyGenerated: \(isNewlyGenerated)")
+                                print("📱 DEBUG: isFirstChapter: \(isFirstChapter)")
+                                print("📱 DEBUG: Story ID: \(story.id)")
+                                print("📱 DEBUG: Chapter index: \(currentChapterIndex)")
+                            }
+
+                        }
+                    } else {
+                        Text("Chapter content not available")
+                            .font(DesignSystem.Typography.body)
+                            .foregroundColor(DesignSystem.Colors.textSecondary)
+                    }
+                }
+                .lineSpacing(6)
+                .multilineTextAlignment(.leading)
                 
                 // Chapter stats
                 HStack {
@@ -796,18 +848,45 @@ struct ChapterView: View {
             }
             .buttonStyle(PlainButtonStyle())
             
-            // Heart Button
+            // Voice Button
             Button(action: {
-                // TODO: Implement voice functionality
+                print("🔘 VOICE BUTTON PRESSED!")
+                print("📱 Current chapters count: \(chapters.count)")
+                print("📖 Current chapter index: \(currentChapterIndex)")
+                
+                if let chapter = currentChapter {
+                    print("✅ Current chapter found: '\(chapter.title)'")
+                    print("📝 Chapter content length: \(chapter.content.count)")
+                    print("🎤 VoiceService state:")
+                    print("   - isPlaying: \(voiceService.isPlaying)")
+                    print("   - isLoading: \(voiceService.isLoading)")
+                    print("   - hasAudio: \(voiceService.hasAudio)")
+                    print("   - error: \(voiceService.error ?? "none")")
+                    
+                    if voiceService.isPlaying {
+                        print("⏸️ PAUSING AUDIO")
+                        voiceService.pause()
+                    } else if voiceService.hasAudio {
+                        print("▶️ PLAYING EXISTING AUDIO")
+                        voiceService.play()
+                    } else {
+                        print("🎤 STARTING NEW SYNTHESIS")
+                        print("📄 Text preview: \(String(chapter.content.prefix(100)))...")
+                        voiceService.synthesizeAndPlaySmart(text: chapter.content)
+                    }
+                } else {
+                    print("❌ NO CURRENT CHAPTER FOUND!")
+                    print("📚 Available chapters: \(chapters.map { $0.title })")
+                }
             }) {
                 VStack(spacing: 4) {
-                    Image(systemName: "heart")
+                    Image(systemName: voiceService.isPlaying ? "pause.fill" : "speaker.wave.2.fill")
                         .font(.system(size: 20, weight: .semibold))
-                    Text("Voice")
+                    Text(voiceService.isPlaying ? "Pause" : "Voice")
                         .font(DesignSystem.Typography.caption)
                         .fontWeight(.medium)
                 }
-                .foregroundColor(DesignSystem.Colors.textSecondary)
+                .foregroundColor(voiceService.isPlaying ? DesignSystem.Colors.accent : DesignSystem.Colors.textSecondary)
                 .frame(maxWidth: .infinity)
                 .frame(height: 60)
                 .background(
@@ -815,7 +894,7 @@ struct ChapterView: View {
                         .fill(DesignSystem.Colors.surface)
                         .overlay(
                             RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.lg)
-                                .stroke(DesignSystem.Colors.textTertiary.opacity(0.3), lineWidth: 1)
+                                .stroke(voiceService.isPlaying ? DesignSystem.Colors.accent.opacity(0.5) : DesignSystem.Colors.textTertiary.opacity(0.3), lineWidth: 1)
                         )
                 )
             }
@@ -1123,6 +1202,8 @@ struct ChapterCardView: View {
     let isExpanded: Bool
     let isLastChapter: Bool
     let isGenerating: Bool
+    let story: Story
+    let isFirstChapter: Bool
     let onToggle: () -> Void
     let onContinueGeneration: ((Int) -> Void)?
     
@@ -1256,14 +1337,45 @@ struct ChapterCardView: View {
                 .cornerRadius(1)
                 .padding(.horizontal, DesignSystem.Spacing.lg)
             
-            // Chapter Text
-            Text(chapter.content)
-                .font(DesignSystem.Typography.body)
-                .foregroundColor(DesignSystem.Colors.textPrimary)
-                .lineSpacing(8)
-                .lineLimit(nil)
-                .padding(.horizontal, DesignSystem.Spacing.lg)
-                .padding(.bottom, DesignSystem.Spacing.lg)
+            // Chapter Text - Auto-start voice for newly generated stories, button control for existing stories
+            Group {
+                if NewStoryTracker.shared.isNewlyGenerated(story.id) && isFirstChapter {
+                    // Use typewriter effect with automatic TTS for newly generated stories
+                    TypewriterTextWithTTS(
+                        text: chapter.content,
+                        font: DesignSystem.Typography.body,
+                        color: DesignSystem.Colors.textPrimary,
+                        highlightColor: DesignSystem.Colors.accent.opacity(0.3),
+                        speed: 50.0
+                    )
+                    .onAppear {
+                        print("📱 DEBUG: Using TypewriterTextWithTTS for newly generated story (chapter card)")
+                        print("📱 DEBUG: Story ID: \(story.id)")
+                        print("📱 DEBUG: Content length: \(chapter.content.count)")
+                        // Mark story as viewed after typewriter starts
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                            NewStoryTracker.shared.markAsViewed(story.id)
+                        }
+                    }
+                } else {
+                    // Use highlighted text with manual voice controls for existing stories
+                    HighlightedText(
+                        text: chapter.content,
+                        font: DesignSystem.Typography.body,
+                        color: DesignSystem.Colors.textPrimary,
+                        highlightColor: DesignSystem.Colors.accent.opacity(0.3)
+                    )
+                    .onAppear {
+                        print("📱 DEBUG: Using HighlightedText component in chapter card")
+                        print("📱 DEBUG: Story ID: \(story.id)")
+                        print("📱 DEBUG: Chapter content length: \(chapter.content.count)")
+                    }
+                }
+            }
+            .lineSpacing(8)
+            .lineLimit(nil)
+            .padding(.horizontal, DesignSystem.Spacing.lg)
+            .padding(.bottom, DesignSystem.Spacing.lg)
         }
         .transition(.asymmetric(
             insertion: .opacity.combined(with: .move(edge: .top)).combined(with: .scale(scale: 0.95)),

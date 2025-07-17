@@ -458,75 +458,30 @@ struct StoryGenerationFlowView: View {
             }
             .padding(.bottom, DesignSystem.Spacing.md)
             
-            // Story content with modern styling
-            VStack(alignment: .leading, spacing: DesignSystem.Spacing.md) {
-                HStack {
-                    Text("Your Story")
-                        .font(DesignSystem.Typography.headline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(DesignSystem.Colors.textPrimary)
-                    
-                    Spacer()
-                    
-                    Text("\(finalStory.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }.count) words")
-                        .font(DesignSystem.Typography.caption)
-                        .foregroundColor(DesignSystem.Colors.textSecondary)
-                }
+            // Saving state - no story content shown
+            VStack(spacing: DesignSystem.Spacing.lg) {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: DesignSystem.Colors.primary))
+                    .scaleEffect(1.5)
                 
-                ScrollView {
-                    Text(finalStory)
-                        .font(DesignSystem.Typography.body)
-                        .foregroundColor(DesignSystem.Colors.textPrimary)
-                        .lineSpacing(6)
-                        .multilineTextAlignment(.leading)
-                        .padding(DesignSystem.Spacing.lg)
-                }
-                .frame(maxHeight: 400)
-                .background(
-                    RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.xl)
-                        .fill(DesignSystem.Colors.surface)
-                        .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 6)
-                )
-            }
-            
-            // Action buttons
-            VStack(spacing: DesignSystem.Spacing.md) {
-                // Save button
-                Button(action: saveStory) {
-                    HStack(spacing: DesignSystem.Spacing.sm) {
-                        Image(systemName: "bookmark.fill")
-                            .font(.title3)
-                        Text("Save Story")
-                            .font(DesignSystem.Typography.bodyEmphasized)
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, DesignSystem.Spacing.md)
-                    .background(
-                        RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.lg)
-                            .fill(DesignSystem.Gradients.primary)
-                            .shadow(color: DesignSystem.Colors.primary.opacity(0.3), radius: 12, x: 0, y: 6)
-                    )
-                }
+                Text("Saving your story...")
+                    .font(DesignSystem.Typography.headline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(DesignSystem.Colors.textPrimary)
                 
-                // Regenerate story button
-                Button(action: regenerateStory) {
-                    HStack(spacing: DesignSystem.Spacing.sm) {
-                        Image(systemName: "arrow.clockwise")
-                            .font(.title3)
-                        Text("Regenerate Story")
-                            .font(DesignSystem.Typography.bodyEmphasized)
-                    }
+                Text("Your story will open automatically in the reading view with a typewriter effect!")
+                    .font(DesignSystem.Typography.body)
                     .foregroundColor(DesignSystem.Colors.textSecondary)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, DesignSystem.Spacing.md)
-                    .background(
-                        RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.lg)
-                            .fill(DesignSystem.Colors.surface)
-                            .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 4)
-                    )
-                }
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, DesignSystem.Spacing.lg)
             }
+            .frame(maxWidth: .infinity)
+            .padding(DesignSystem.Spacing.xxl)
+            .background(
+                RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.xl)
+                    .fill(DesignSystem.Colors.surface)
+                    .shadow(color: .black.opacity(0.08), radius: 12, x: 0, y: 6)
+            )
         }
     }
     
@@ -931,9 +886,12 @@ struct StoryGenerationFlowView: View {
                 
                 await MainActor.run {
                     finalStory = chapterContent
-                    isLoading = false
+                    // Don't set isLoading = false here to prevent UI from showing content
                     retryAttempt = 0
                 }
+                
+                // Auto-save the story immediately without showing content
+                await autoSaveStoryAndNavigate()
             } catch {
                 await MainActor.run {
                     // Don't show error dialog for rate limiting - retry happens silently
@@ -1023,6 +981,90 @@ struct StoryGenerationFlowView: View {
                     showingError = true
                     isLoading = false
                 }
+            }
+        }
+    }
+    
+    private func autoSaveStoryAndNavigate() async {
+        guard let plot = selectedPlot else { return }
+        
+        do {
+            print("🔄 Starting auto-save process...")
+            
+            guard let currentUser = supabaseService.currentUser else {
+                throw NSError(domain: "StoryGenerationError", code: 1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
+            }
+            
+            let wordsCount = finalStory.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }.count
+            let readingTime = max(1, wordsCount / 200) // Assume 200 words per minute
+            
+            print("📊 Story stats: \(wordsCount) words, \(readingTime) min read")
+            
+            // Create story without content field (new chapter-based structure)
+            let story = Story(
+                id: UUID(),
+                userId: currentUser.userId,
+                title: storyTitle,
+                summary: String(finalStory.prefix(200)) + (finalStory.count > 200 ? "..." : ""),
+                genre: storyParameters.genre,
+                mood: storyParameters.mood,
+                isPublished: false,
+                isPremium: false,
+                likesCount: 0,
+                viewsCount: 0,
+                totalWordsCount: wordsCount,
+                totalReadingTime: readingTime,
+                chaptersCount: 1,
+                createdAt: Date(),
+                updatedAt: Date(),
+                publishedAt: nil,
+                generationPrompt: initialPrompt,
+                generationParameters: storyParameters
+            )
+            
+            print("📝 Creating story in database...")
+            let createdStory = try await supabaseService.createStory(story)
+            print("✅ Story created with ID: \(createdStory.id)")
+            
+            // Create Chapter 1
+            let chapter1 = Chapter(
+                storyId: createdStory.id,
+                chapterNumber: 1,
+                title: "Chapter 1",
+                content: finalStory,
+                wordsCount: wordsCount,
+                readingTime: readingTime,
+                generationPrompt: initialPrompt
+            )
+            
+            print("📖 Creating chapter in database...")
+            let createdChapter = try await supabaseService.createChapter(chapter1)
+            print("✅ Chapter created with ID: \(createdChapter.id)")
+            
+            // Create a story object with chapters attached for navigation
+            var storyWithChapters = createdStory
+            storyWithChapters.chapters = [createdChapter]
+            
+            // Mark story as newly generated for typewriter effect
+            NewStoryTracker.shared.markAsNewlyGenerated(createdStory.id)
+            print("🏷️ Marked story as newly generated")
+            
+            await MainActor.run {
+                print("🧭 Posting navigation notification...")
+                // Post notification to navigate to reading screen with chapters attached
+                NotificationCenter.default.post(
+                    name: NSNotification.Name("NavigateToNewStory"),
+                    object: storyWithChapters
+                )
+                
+                dismiss()
+            }
+        } catch {
+            print("❌ Auto-save failed: \(error)")
+            await MainActor.run {
+                errorMessage = error.localizedDescription
+                showingError = true
+                isLoading = false
             }
         }
     }

@@ -8,10 +8,14 @@ class MistralService: ObservableObject {
     private let session: URLSession
     
     init() {
-        self.apiKey = AppConfig.mistralAPIKey
-        self.baseURL = AppConfig.mistralBaseURL
-        self.model = AppConfig.mistralModel
+        // Using OpenRouter + DeepSeek for story generation
+        self.apiKey = AppConfig.storyGenerationAPIKey
+        self.baseURL = AppConfig.storyGenerationBaseURL
+        self.model = AppConfig.storyGenerationModel
         self.session = URLSession.shared
+        
+        print("🔧 Initialized story generation with DeepSeek V3 via OpenRouter")
+        print("📝 Model: \(self.model)")
     }
     
     // MARK: - Interactive Story Generation Methods
@@ -53,14 +57,31 @@ class MistralService: ObservableObject {
         do {
             let cleanedContent = extractJSONFromResponse(content)
             guard let data = cleanedContent.data(using: .utf8) else {
+                print("❌ Failed to convert to UTF8 data")
                 throw MistralError.invalidResponse
             }
             
             let plotOptions = try JSONDecoder().decode([PlotOption].self, from: data)
+            print("✅ Successfully parsed \(plotOptions.count) plot options")
             return plotOptions
         } catch {
             // Fallback: generate default plot options if JSON parsing fails
-            print("JSON parsing failed, using fallback plot options: \(error)")
+            print("❌ JSON parsing failed, using fallback plot options: \(error)")
+            if let decodingError = error as? DecodingError {
+                switch decodingError {
+                case .dataCorrupted(let context):
+                    print("❌ Data corrupted: \(context.debugDescription)")
+                case .keyNotFound(let key, let context):
+                    print("❌ Key not found: \(key), context: \(context.debugDescription)")
+                case .typeMismatch(let type, let context):
+                    print("❌ Type mismatch: \(type), context: \(context.debugDescription)")
+                case .valueNotFound(let type, let context):
+                    print("❌ Value not found: \(type), context: \(context.debugDescription)")
+                @unknown default:
+                    print("❌ Unknown decoding error")
+                }
+            }
+            
             return [
                 PlotOption(
                     title: "The Beginning",
@@ -489,6 +510,10 @@ class MistralService: ObservableObject {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
+        // OpenRouter-specific headers for tracking and optimization
+        request.setValue("DreamWeaver/2.0", forHTTPHeaderField: "HTTP-Referer")
+        request.setValue("DreamWeaver", forHTTPHeaderField: "X-Title")
+        
         let requestBody = MistralRequest(
             model: model,
             messages: [
@@ -502,35 +527,63 @@ class MistralService: ObservableObject {
         request.httpBody = try JSONEncoder().encode(requestBody)
         request.timeoutInterval = AppConfig.generationTimeoutSeconds
         
+        print("🌐 Making request to OpenRouter DeepSeek API")
+        print("📋 Model: \(model)")
+        print("🌡️ Temperature: \(temperature)")
+        
         return request
     }
     
     private func extractJSONFromResponse(_ content: String) -> String {
-        // Find the first [ or { character
+        print("🔍 Raw AI response: \(content.prefix(200))...")
+        
+        // First, clean up the content by removing markdown code blocks
+        var cleanedContent = content
+        
+        // Remove markdown code blocks (```json and ```)
+        cleanedContent = cleanedContent.replacingOccurrences(of: "```json", with: "")
+        cleanedContent = cleanedContent.replacingOccurrences(of: "```", with: "")
+        
+        // Remove any leading backticks that might cause parsing issues
+        cleanedContent = cleanedContent.replacingOccurrences(of: "`", with: "")
+        
+        // Remove any leading/trailing whitespace and newlines
+        cleanedContent = cleanedContent.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        print("🧹 Cleaned content: \(cleanedContent.prefix(200))...")
+        
+        // Find the first [ or { character and extract JSON properly
         let startChars: [Character] = ["[", "{"]
-        let endChars: [Character] = ["]", "}"]
         
         var startIndex: String.Index?
         var endIndex: String.Index?
         var bracketCount = 0
-        var isInBrackets = false
-        var matchingEndChar: Character?
+        var currentChar: Character?
         
-        for (index, char) in content.enumerated() {
-            let stringIndex = content.index(content.startIndex, offsetBy: index)
-            
-            if startChars.contains(char) && startIndex == nil {
-                startIndex = stringIndex
-                isInBrackets = true
+        // Find the start of JSON
+        for (index, char) in cleanedContent.enumerated() {
+            if startChars.contains(char) {
+                startIndex = cleanedContent.index(cleanedContent.startIndex, offsetBy: index)
+                currentChar = char
                 bracketCount = 1
-                matchingEndChar = char == "[" ? "]" : "}"
-            } else if isInBrackets {
-                if char == startChars[0] || char == startChars[1] {
+                break
+            }
+        }
+        
+        // Find the matching end bracket
+        if let start = startIndex, let startChar = currentChar {
+            let matchingEndChar: Character = startChar == "[" ? "]" : "}"
+            let searchStart = cleanedContent.index(after: start)
+            
+            for (index, char) in cleanedContent[searchStart...].enumerated() {
+                let actualIndex = cleanedContent.index(searchStart, offsetBy: index)
+                
+                if char == startChar {
                     bracketCount += 1
                 } else if char == matchingEndChar {
                     bracketCount -= 1
                     if bracketCount == 0 {
-                        endIndex = content.index(after: stringIndex)
+                        endIndex = cleanedContent.index(after: actualIndex)
                         break
                     }
                 }
@@ -538,10 +591,22 @@ class MistralService: ObservableObject {
         }
         
         if let start = startIndex, let end = endIndex {
-            return String(content[start..<end])
+            let extractedJSON = String(cleanedContent[start..<end])
+            print("✅ Extracted JSON: \(extractedJSON.prefix(200))...")
+            return extractedJSON
         }
         
-        return content.trimmingCharacters(in: .whitespacesAndNewlines)
+        // If we can't extract JSON properly, try to find it with regex as fallback
+        let jsonPattern = #"[\[\{].*[\]\}]"#
+        if let regex = try? NSRegularExpression(pattern: jsonPattern, options: [.dotMatchesLineSeparators]),
+           let match = regex.firstMatch(in: cleanedContent, options: [], range: NSRange(location: 0, length: cleanedContent.count)) {
+            let matchedString = String(cleanedContent[Range(match.range, in: cleanedContent)!])
+            print("📝 Regex extracted JSON: \(matchedString.prefix(200))...")
+            return matchedString
+        }
+        
+        print("⚠️ No valid JSON found, returning cleaned content")
+        return cleanedContent
     }
     
     // MARK: - Enhanced API Call Method
