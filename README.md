@@ -1,16 +1,23 @@
 # DreamWeaver iOS App
 
-A powerful story generation app for iOS that uses AI to create compelling narratives. Built with SwiftUI, Supabase, and Mistral AI.
+[![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org)
+[![iOS](https://img.shields.io/badge/iOS-16.0+-blue.svg)](https://developer.apple.com/ios/)
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-3.0+-green.svg)](https://developer.apple.com/xcode/swiftui/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
+
+A powerful AI-driven story generation app for iOS that empowers users to create compelling narratives with advanced AI technology. Built with SwiftUI, Supabase, OpenRouter DeepSeek for story generation, and OpenAI for cover generation and text-to-speech.
 
 ## Features
 
-✨ **AI Story Generation** - Create stories using advanced AI with customizable parameters
-📚 **Story Management** - Save, edit, and organize your stories
-🔍 **Discover Stories** - Browse and discover stories from other users
-👤 **User Profiles** - Manage your profile and view your story statistics
-🎨 **Modern UI/UX** - Beautiful, intuitive interface with smooth animations
-🔐 **Authentication** - Secure user authentication with Supabase
-📱 **Native iOS** - Built with SwiftUI for optimal performance
+**AI Story Generation** - Create unique stories using OpenRouter DeepSeek with customizable parameters  
+**AI Cover Generation** - Generate stunning story covers using OpenAI's DALL-E  
+**Text-to-Speech** - Listen to your stories with OpenAI's advanced TTS technology  
+**Story Management** - Save, edit, and organize your stories in your personal library  
+**Discover Stories** - Browse and discover stories from the community  
+**User Profiles** - Comprehensive profile management with story statistics  
+**Modern UI/UX** - Beautiful, intuitive interface with smooth animations  
+**Secure Authentication** - Robust user authentication powered by Supabase  
+**Native iOS Experience** - Built with SwiftUI for optimal performance and native feel
 
 ## Prerequisites
 
@@ -18,15 +25,16 @@ A powerful story generation app for iOS that uses AI to create compelling narrat
 - Xcode 15.0 or later
 - Swift 5.9 or later
 - Supabase account
-- Mistral AI account (already configured)
+- OpenRouter account (for DeepSeek story generation)
+- OpenAI API key (for cover generation and TTS)
 
 ## Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
-cd dreamweaver2.0
+git clone https://github.com/BRMilev22/DreamWeaver.git
+cd DreamWeaver
 ```
 
 ### 2. Supabase Setup
@@ -129,12 +137,14 @@ CREATE TRIGGER update_stories_updated_at BEFORE UPDATE ON stories FOR EACH ROW E
 ### 4. Configure App Settings
 
 1. Open `dreamweaver2.0/dreamweaver2.0/Config/AppConfig.swift`
-2. Update the Supabase configuration:
+2. Update the configuration with your API credentials:
 
 ```swift
-// Replace with your actual Supabase credentials
+// Replace with your actual credentials
 static let supabaseURL = "https://your-project-id.supabase.co"
 static let supabaseAnonKey = "your-anon-key-here"
+static let openRouterAPIKey = "your-openrouter-api-key"
+static let openAIAPIKey = "your-openai-api-key"
 ```
 
 ### 5. Add Supabase Dependencies
@@ -188,12 +198,20 @@ The app follows a clean architecture pattern:
 
 ## API Integration
 
-### Mistral AI
+### OpenRouter DeepSeek
 
-The app uses Mistral AI's large language model for story generation:
-- **Model**: `mistral-large-latest`
+The app uses OpenRouter's DeepSeek model for story generation:
+- **Model**: DeepSeek via OpenRouter API
 - **API**: REST API with JSON requests
 - **Configuration**: Customizable temperature, max tokens, and prompts
+- **Cost-effective**: Optimized for high-quality story generation
+
+### OpenAI
+
+Multiple OpenAI services for enhanced storytelling:
+- **DALL-E**: AI-generated story covers and illustrations
+- **Text-to-Speech**: High-quality audio narration of stories
+- **API**: REST API integration with secure key management
 
 ### Supabase
 
@@ -209,6 +227,8 @@ Database and authentication powered by Supabase:
 - **Authentication** - Supabase Auth for user management
 - **Data Validation** - Input validation and sanitization
 
+For security issues, please see [SECURITY.md](SECURITY.md).
+
 ## Customization
 
 ### Themes and Styling
@@ -219,9 +239,11 @@ Database and authentication powered by Supabase:
 
 ### Story Generation
 
-- Adjust prompts in `MistralService.swift`
+- Adjust prompts in `OpenRouterService.swift`
 - Modify generation parameters in `StoryGenerationParameters`
 - Add new genres or moods in the respective enum types
+- Customize cover generation prompts in `OpenAIService.swift`
+- Configure TTS voice settings and parameters
 
 ## Troubleshooting
 
@@ -236,8 +258,19 @@ Database and authentication powered by Supabase:
    - Check that your Supabase project is active
 
 3. **Story Generation Fails**
-   - Ensure Mistral API key is valid
+   - Ensure OpenRouter API key is valid and has sufficient credits
    - Check network connectivity
+   - Verify DeepSeek model availability
+
+4. **Cover Generation Issues**
+   - Verify OpenAI API key is valid
+   - Check DALL-E API quota and usage limits
+   - Ensure image generation prompts are appropriate
+
+5. **TTS Not Working**
+   - Confirm OpenAI API key has TTS access
+   - Check audio permissions on device
+   - Verify text length is within TTS limits
 
 ### Getting Help
 
@@ -247,14 +280,33 @@ Database and authentication powered by Supabase:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Contributing
+
+This is a personal project developed as part of a freelance assignment. While contributions are welcome, please note that all rights and copyright belong to Boris Milev.
+
+For bug reports, feature requests, or questions, please open an issue on GitHub.
+
+## Contact
+
+- **Author**: Boris Milev
+- **Email**: zvarazoku9@icloud.com
+- **GitHub**: [@BRMilev22](https://github.com/BRMilev22)
 
 ## Acknowledgments
 
-- **Supabase** - Backend as a Service
-- **Mistral AI** - AI-powered story generation
+- **Supabase** - Backend as a Service platform
+- **OpenRouter** - API gateway for accessing DeepSeek and other AI models
+- **DeepSeek** - Advanced AI language model for story generation
+- **OpenAI** - DALL-E for cover generation and TTS for audio narration
 - **SwiftUI** - Modern iOS UI framework
+- **Apple Developer Community** - For excellent documentation and resources
 
 ---
 
-Built with ❤️ for storytellers and AI enthusiasts. 
+<div align="center">
+  <b>Built with ❤️</b>
+  <br>
+  <sub>© 2024 Boris Milev. All rights reserved.</sub>
+</div> 
