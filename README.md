@@ -9,20 +9,65 @@ A powerful AI-driven story generation app for iOS that empowers users to create 
 
 ## Screenshots
 
+### 🎯 Story Generation Process
 <div align="center">
-  <img src="images/story-generation-animation.png" alt="Story Generation Process" width="250"/>
-  <img src="images/generate-title-screen.png" alt="Generate Title Screen" width="250"/>
-  <img src="images/choose-plot.png" alt="Choose Plot Screen" width="250"/>
+  <img src="images/story-generation-animation.png" alt="Story Generation Animation" width="300"/>
+  <br>
+  <em>Interactive story generation with smooth animations and progress indicators</em>
 </div>
 
+---
+
+### 📝 Title Generation
 <div align="center">
-  <img src="images/meet-your-characters.png" alt="Meet Your Characters" width="250"/>
-  <img src="images/generated-story-screen.png" alt="Generated Story Screen" width="250"/>
-  <img src="images/story-screen.png" alt="Story Reading Screen" width="250"/>
+  <img src="images/generate-title-screen.png" alt="Generate Title Screen" width="300"/>
+  <br>
+  <em>AI-powered title generation with customizable prompts and parameters</em>
 </div>
 
+---
+
+### 🎭 Plot Selection
 <div align="center">
-  <img src="images/reading-tab.png" alt="Reading Tab" width="250"/>
+  <img src="images/choose-plot.png" alt="Choose Plot Screen" width="300"/>
+  <br>
+  <em>Interactive plot selection interface with genre-specific options</em>
+</div>
+
+---
+
+### 👥 Character Introduction
+<div align="center">
+  <img src="images/meet-your-characters.png" alt="Meet Your Characters" width="300"/>
+  <br>
+  <em>Dynamic character presentation with AI-generated personalities and backgrounds</em>
+</div>
+
+---
+
+### 📖 Generated Story Display
+<div align="center">
+  <img src="images/generated-story-screen.png" alt="Generated Story Screen" width="300"/>
+  <br>
+  <em>Clean story presentation with editing options and sharing capabilities</em>
+</div>
+
+---
+
+### 📚 Story Reading Experience
+<div align="center">
+  <img src="images/story-screen.png" alt="Story Reading Screen" width="300"/>
+  <br>
+  <em>Immersive reading interface with typography optimized for mobile devices</em>
+</div>
+
+---
+
+### 📱 Library & Reading Tab
+<div align="center">
+  <img src="images/reading-tab.png" alt="Reading Tab" width="300"/>
+  <br>
+  <em>Personal story library with organized collections and easy access</em>
 </div>
 
 ## Features
