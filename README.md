@@ -7,6 +7,24 @@
 
 A powerful AI-driven story generation app for iOS that empowers users to create compelling narratives with advanced AI technology. Built with SwiftUI, Supabase, OpenRouter DeepSeek for story generation, and OpenAI for cover generation and text-to-speech.
 
+## Screenshots
+
+<div align="center">
+  <img src="images/story-generation-animation.png" alt="Story Generation Process" width="250"/>
+  <img src="images/generate-title-screen.png" alt="Generate Title Screen" width="250"/>
+  <img src="images/choose-plot.png" alt="Choose Plot Screen" width="250"/>
+</div>
+
+<div align="center">
+  <img src="images/meet-your-characters.png" alt="Meet Your Characters" width="250"/>
+  <img src="images/generated-story-screen.png" alt="Generated Story Screen" width="250"/>
+  <img src="images/story-screen.png" alt="Story Reading Screen" width="250"/>
+</div>
+
+<div align="center">
+  <img src="images/reading-tab.png" alt="Reading Tab" width="250"/>
+</div>
+
 ## Features
 
 **AI Story Generation** - Create unique stories using OpenRouter DeepSeek with customizable parameters  
