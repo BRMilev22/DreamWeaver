@@ -9,66 +9,51 @@ A powerful AI-driven story generation app for iOS that empowers users to create 
 
 ## Screenshots
 
-### 🎯 Story Generation Process
-<div align="center">
-  <img src="images/story-generation-animation.png" alt="Story Generation Animation" width="300"/>
-  <br>
-  <em>Interactive story generation with smooth animations and progress indicators</em>
-</div>
-
----
-
-### 📝 Title Generation
-<div align="center">
-  <img src="images/generate-title-screen.png" alt="Generate Title Screen" width="300"/>
-  <br>
-  <em>AI-powered title generation with customizable prompts and parameters</em>
-</div>
-
----
-
-### 🎭 Plot Selection
-<div align="center">
-  <img src="images/choose-plot.png" alt="Choose Plot Screen" width="300"/>
-  <br>
-  <em>Interactive plot selection interface with genre-specific options</em>
-</div>
-
----
-
-### 👥 Character Introduction
-<div align="center">
-  <img src="images/meet-your-characters.png" alt="Meet Your Characters" width="300"/>
-  <br>
-  <em>Dynamic character presentation with AI-generated personalities and backgrounds</em>
-</div>
-
----
-
-### 📖 Generated Story Display
-<div align="center">
-  <img src="images/generated-story-screen.png" alt="Generated Story Screen" width="300"/>
-  <br>
-  <em>Clean story presentation with editing options and sharing capabilities</em>
-</div>
-
----
-
-### 📚 Story Reading Experience
-<div align="center">
-  <img src="images/story-screen.png" alt="Story Reading Screen" width="300"/>
-  <br>
-  <em>Immersive reading interface with typography optimized for mobile devices</em>
-</div>
-
----
-
-### 📱 Library & Reading Tab
-<div align="center">
-  <img src="images/reading-tab.png" alt="Reading Tab" width="300"/>
-  <br>
-  <em>Personal story library with organized collections and easy access</em>
-</div>
+<table align="center">
+  <tr>
+    <td align="center" width="250">
+      <img src="images/story-generation-animation.png" alt="Story Generation" width="200"/><br>
+      <b>🎯 Story Generation</b><br>
+      <sub>Interactive generation process</sub>
+    </td>
+    <td align="center" width="250">
+      <img src="images/generate-title-screen.png" alt="Title Generation" width="200"/><br>
+      <b>📝 Title Generation</b><br>
+      <sub>AI-powered title creation</sub>
+    </td>
+    <td align="center" width="250">
+      <img src="images/choose-plot.png" alt="Plot Selection" width="200"/><br>
+      <b>🎭 Plot Selection</b><br>
+      <sub>Genre-specific plot options</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="250">
+      <img src="images/meet-your-characters.png" alt="Character Introduction" width="200"/><br>
+      <b>👥 Meet Characters</b><br>
+      <sub>AI-generated personalities</sub>
+    </td>
+    <td align="center" width="250">
+      <img src="images/generated-story-screen.png" alt="Story Display" width="200"/><br>
+      <b>📖 Story Display</b><br>
+      <sub>Clean story presentation</sub>
+    </td>
+    <td align="center" width="250">
+      <img src="images/story-screen.png" alt="Reading Experience" width="200"/><br>
+      <b>📚 Reading View</b><br>
+      <sub>Optimized reading interface</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="250">
+      <img src="images/reading-tab.png" alt="Library Tab" width="200"/><br>
+      <b>📱 Story Library</b><br>
+      <sub>Personal collection management</sub>
+    </td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
 
 ## Features
 
